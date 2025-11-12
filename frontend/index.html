@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Key Generator</title>
+  <style>
+    body { font-family: sans-serif; display: grid; place-items: center; min-height: 90vh; background: #f4f4f4; }
+    .container { text-align: center; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    button { background: #007bff; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; }
+    button:disabled { background: #aaa; }
+    #apiKey { width: 400px; padding: 8px; margin-top: 20px; font-family: monospace; font-size: 1.1em; text-align: center; }
+    #status { margin-top: 15px; font-style: italic; color: #555; }
+  </style>
+</head><body>
+
+  <div class="container">
+    <h1>API Key Generator</h1>
+    <button id="generateBtn">Generate Key Baru</button>
+    <p id="status"></p>
+    <input type="text" id="apiKey" readonly placeholder="API Key akan muncul di sini...">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
