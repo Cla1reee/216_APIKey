@@ -1,26 +1,75 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API Key Generator</title>
   <style>
-    body { font-family: sans-serif; display: grid; place-items: center; min-height: 90vh; background: #f4f4f4; }
-    .container { text-align: center; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    button { background: #007bff; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; }
-    button:disabled { background: #aaa; }
-    #apiKey { width: 400px; padding: 8px; margin-top: 20px; font-family: monospace; font-size: 1.1em; text-align: center; }
-    #status { margin-top: 15px; font-style: italic; color: #555; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: grid; place-items: center; min-height: 90vh; background-color: #f0f2f5; }
+    .container { width: 100%; max-width: 600px; }
+    .card { background: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    h1 { text-align: center; margin-top: 0; color: #333; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #555; }
+    .form-group input { width: 100%; padding: 10px; font-size: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+    .btn-submit { width: 100%; background: #007bff; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+    .btn-submit:disabled { background: #aaa; cursor: not-allowed; }
+    #status { margin-top: 15px; font-style: italic; color: #d9534f; text-align: center; }
+    #result-container { display: none; margin-top: 25px; border-radius: 8px; overflow: hidden; }
+    .result-success { background: #e6f7ec; border: 1px solid #b7ebc9; padding: 20px; }
+    .result-success h2 { margin-top: 0; color: #237844; }
+    .result-field { margin-bottom: 10px; font-family: monospace; font-size: 14px; word-wrap: break-word; }
+    .result-field span { font-weight: 600; color: #333; font-family: sans-serif; }
+    .result-warning { background: #fffbe6; border: 1px solid #ffe58f; padding: 15px 20px; color: #5f4d21; }
+    .result-warning::before { content: ""; }
+    .copy-buttons { margin-top: 15px; }
+    .btn-copy { background: #f0f0f0; border: 1px solid #ccc; color: #333; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; font-size: 13px; }
+    .btn-copy:hover { background: #e0e0e0; }
   </style>
-</head><body>
+</head>
+<body>
 
   <div class="container">
-    <h1>API Key Generator</h1>
-    <button id="generateBtn">Generate Key Baru</button>
-    <p id="status"></p>
-    <input type="text" id="apiKey" readonly placeholder="API Key akan muncul di sini...">
+    <div class="card">
+      <h1>Generate API Key</h1>
+      
+      <form id="generate-form">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" placeholder="Masukkan username" required>
+        </div>
+        <div class="form-group">
+          <label for="apiName">Nama API:</label>
+          <input type="text" id="apiName" placeholder="Contoh: Weather API, Payment API, dll" required>
+        </div>
+        <button type="submit" id="generateBtn" class="btn-submit">Generate Key</button>
+      </form>
+
+      <p id="status"></p>
+    </div>
+
+    <div id="result-container">
+      <div class="result-success">
+        <h2>API Key Berhasil Dibuat!</h2>
+        <div class="result-field"><span>ID:</span> <span id="res-id"></span></div>
+        <div class="result-field"><span>Username:</span> <span id="res-username"></span></div>
+        <div class="result-field"><span>Nama API:</span> <span id="res-apiName"></span></div>
+        <div class="result-field"><span>API Key:</span> <span id="res-apiKey"></span></div>
+        <div class="result-field"><span>API Secret:</span> <span id="res-apiSecret"></span></div>
+        <div class="result-field"><span>Dibuat:</span> <span id="res-createdAt"></span></div>
+        
+        <div class="copy-buttons">
+          <button class="btn-copy" data-target="res-apiKey">Copy Key</button>
+          <button class="btn-copy" data-target="res-apiSecret">Copy Secret</button>
+        </div>
+      </div>
+      <div class="result-warning">
+        <b>Simpan API Key dan Secret dengan aman.</b> Secret tidak dapat dilihat kembali.
+      </div>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
-</body>
-</html>
+
+
